@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GuessRow">
+        <attr name="guessWord" format="string"/>
+        <attr name="guessValue" format="string"/>
+    </declare-styleable>
+</resources>

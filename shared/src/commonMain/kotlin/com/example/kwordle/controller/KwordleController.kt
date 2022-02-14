@@ -1,0 +1,143 @@
+package com.example.kwordle.controller
+
+import com.example.kwordle.model.Guess
+import com.example.kwordle.model.Kwordle
+import java.util.Observable
+import kotlin.collections.ArrayList
+
+class KwordleController : Observable {
+
+    private var allWords = setOf("smell", "stink", "spies", "smite", "kills", "cling", "horse", "lords")
+    var kwordle = Kwordle(allWords.random())
+    var currentGuess = ""
+    var guesses = ArrayList<Guess>()
+    var gameOver = false
+    var win = false
+
+    constructor()
+
+    constructor(dictionary: Set<String>, word: String) {
+        allWords = dictionary
+        kwordle = Kwordle(word)
+    }
+
+    constructor (word: String) {
+        kwordle = Kwordle(word)
+    }
+
+    constructor(dictionary: Set<String>) {
+        allWords = dictionary
+        kwordle = Kwordle(allWords.random())
+    }
+
+
+    /**
+     * Adds a letter to the current guess
+     *
+     * @param letter the letter to add
+     * @modifies currentGuess
+     * @returns whether the letter was added
+     */
+    fun addLetterToGuess(letter: Char) : Boolean {
+        if(!actionCanBePerformed() || currentGuess.length === 5) {
+            return false
+        }
+        currentGuess += letter
+        setChanged()
+        notifyObservers()
+        return true
+    }
+
+    /**
+     * Removes a letter from the current guess
+     *
+     * @modifies currentGuess
+     * @returns whether the letter was removed
+     */
+    fun removeLetterFromGuess() : Boolean {
+        if(!actionCanBePerformed() || currentGuess.length === 0) {
+            return false
+        }
+        currentGuess = currentGuess.dropLast(1)
+        setChanged()
+        notifyObservers()
+        return true
+    }
+
+    /**
+     * Submits the current guess
+     *
+     * @returns true if the guess was submitted, false if it wasn't
+     */
+    fun submitGuess(): Boolean {
+        if(!actionCanBePerformed()) {
+            return false
+        } else if(currentGuess in allWords) {
+            guesses.add(kwordle.guessWord(currentGuess))
+            currentGuess = ""
+            checkForWinOrGameOver()
+            setChanged()
+            notifyObservers()
+            return true;
+        }
+        return false
+    }
+
+    /**
+     * Get the current state of the guessed letters
+     *
+     * @returns the letter map
+     */
+    fun getLetterMap() : Array<Int> {
+        return kwordle.letters
+    }
+
+    /**
+     * Resets the game with a new word
+     *
+     * @modifies kwordle
+     * @modifies currentGuess
+     * @modifies guesses
+     * @modifies gameOver
+     * @modifies win
+     */
+    fun reset() {
+        kwordle = Kwordle(allWords.random())
+        currentGuess = ""
+        guesses = ArrayList<Guess>()
+        gameOver = false
+        win = false
+        setChanged()
+        notifyObservers()
+    }
+
+    /**
+     * Checks whether an action can be performed in the UI
+     *
+     * @returns true if an action can be performed, false otherwise
+     */
+    private fun actionCanBePerformed(): Boolean {
+        if(win || gameOver || guesses.size === 6) {
+            return false
+        }
+        return true
+    }
+
+    /**
+     * Modifies the state if the player has won or
+     * if the player has lost
+     *
+     * @modifies win, gameOver
+     */
+    private fun checkForWinOrGameOver() {
+        if(guesses.last().isCorrect()) {
+            win = true
+            gameOver = true
+        } else if(guesses.size === 6) {
+            win = false
+            gameOver = true
+        }
+    }
+
+
+}

@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/settings_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="26dp"
+        android:text="Settings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/results_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="10dp"
+        android:text="Results"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/total_guess_row_container"
+        android:layout_width="407dp"
+        android:layout_height="357dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginBottom="69dp"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/keyboard_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_button"
+        app:layout_constraintVertical_bias="1.0">
+
+        <com.example.kwordle.android.components.GuessRow
+            android:id="@+id/guess_row_1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".16" />
+
+        <com.example.kwordle.android.components.GuessRow
+            android:id="@+id/guess_row_2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".16" />
+
+        <com.example.kwordle.android.components.GuessRow
+            android:id="@+id/guess_row_3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".16" />
+
+        <com.example.kwordle.android.components.GuessRow
+            android:id="@+id/guess_row_4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".16" />
+
+        <com.example.kwordle.android.components.GuessRow
+            android:id="@+id/guess_row_5"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".16" />
+
+        <com.example.kwordle.android.components.GuessRow
+            android:id="@+id/guess_row_6"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".16" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/keyboard_container"
+        android:layout_width="413dp"
+        android:layout_height="194dp"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/keyboard_row_1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".33"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/keyboard_q"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_q"
+                android:text="Q" />
+
+            <Button
+                android:id="@+id/keyboard_w"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_w"
+                android:text="W" />
+
+            <Button
+                android:id="@+id/keyboard_e"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_e"
+                android:text="E" />
+
+            <Button
+                android:id="@+id/keyboard_r"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_r"
+                android:text="R" />
+
+            <Button
+                android:id="@+id/keyboard_t"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_t"
+                android:text="T" />
+
+            <Button
+                android:id="@+id/keyboard_y"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_y"
+                android:text="y" />
+
+            <Button
+                android:id="@+id/keyboard_u"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_u"
+                android:text="U" />
+
+            <Button
+                android:id="@+id/keyboard_i"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_i"
+                android:text="I" />
+
+            <Button
+                android:id="@+id/keyboard_o"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_o"
+                android:text="O" />
+
+            <Button
+                android:id="@+id/keyboard_p"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_p"
+                android:text="P" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/keyboard_row_2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".33"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/keyboard_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_a"
+                android:text="A" />
+
+            <Button
+                android:id="@+id/keyboard_s"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_s"
+                android:text="S" />
+
+            <Button
+                android:id="@+id/keyboard_d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_d"
+                android:text="D" />
+
+            <Button
+                android:id="@+id/keyboard_f"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_f"
+                android:text="F" />
+
+            <Button
+                android:id="@+id/keyboard_g"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_g"
+                android:text="G" />
+
+            <Button
+                android:id="@+id/keyboard_h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_h"
+                android:text="H" />
+
+            <Button
+                android:id="@+id/keyboard_j"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_j"
+                android:text="J" />
+
+            <Button
+                android:id="@+id/keyboard_k"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_k"
+                android:text="K" />
+
+            <Button
+                android:id="@+id/keyboard_l"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_l"
+                android:text="L" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/keyboard_row_3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.33"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/keyboard_enter"
+                android:layout_width="122dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_enter"
+                android:text="ENTER" />
+
+            <Button
+                android:id="@+id/keyboard_z"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_z"
+                android:text="Z" />
+
+            <Button
+                android:id="@+id/keyboard_x"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_x"
+                android:text="X" />
+
+            <Button
+                android:id="@+id/keyboard_c"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_c"
+                android:text="C" />
+
+            <Button
+                android:id="@+id/keyboard_v"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_v"
+                android:text="V" />
+
+            <Button
+                android:id="@+id/keyboard_b"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_b"
+                android:text="B" />
+
+            <Button
+                android:id="@+id/keyboard_n"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_n"
+                android:text="N" />
+
+            <Button
+                android:id="@+id/keyboard_m"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_m"
+                android:text="M" />
+
+            <ImageButton
+                android:id="@+id/keyboard_back"
+                android:layout_width="122dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="keyboard_back"
+                app:srcCompat="@android:drawable/ic_input_delete"
+                app:tint="#000000" />
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
