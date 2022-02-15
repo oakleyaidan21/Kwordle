@@ -2,10 +2,14 @@ package com.example.kwordle.controller
 
 import com.example.kwordle.model.Guess
 import com.example.kwordle.model.Kwordle
-import java.util.Observable
+import com.example.kwordle.util.KotlinObservable
+import com.example.kwordle.util.KotlinObserver
 import kotlin.collections.ArrayList
 
-class KwordleController : Observable {
+
+class KwordleController : KotlinObservable {
+
+    override val observers: ArrayList<KotlinObserver> = ArrayList()
 
     private var allWords = setOf("smell", "stink", "spies", "smite", "kills", "cling", "horse", "lords")
     var kwordle = Kwordle(allWords.random())
@@ -43,7 +47,7 @@ class KwordleController : Observable {
             return false
         }
         currentGuess += letter
-        setChanged()
+//        setChanged()
         notifyObservers()
         return true
     }
@@ -59,7 +63,7 @@ class KwordleController : Observable {
             return false
         }
         currentGuess = currentGuess.dropLast(1)
-        setChanged()
+//        setChanged()
         notifyObservers()
         return true
     }
@@ -76,7 +80,7 @@ class KwordleController : Observable {
             guesses.add(kwordle.guessWord(currentGuess))
             currentGuess = ""
             checkForWinOrGameOver()
-            setChanged()
+//            setChanged()
             notifyObservers()
             return true;
         }
@@ -107,7 +111,7 @@ class KwordleController : Observable {
         guesses = ArrayList<Guess>()
         gameOver = false
         win = false
-        setChanged()
+//        setChanged()
         notifyObservers()
     }
 

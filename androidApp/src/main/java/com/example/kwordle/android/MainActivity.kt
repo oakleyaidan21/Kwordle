@@ -12,13 +12,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.example.kwordle.android.components.GuessRow
 import com.example.kwordle.controller.KwordleController
-import com.example.kwordle.android.R
+import com.example.kwordle.util.KotlinObserver
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.util.*
 
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, Observer {
+class MainActivity : AppCompatActivity(), View.OnClickListener, KotlinObserver {
     var controller: KwordleController = KwordleController()
     var keyboardLetterButtons = mutableMapOf<Char, Button>()
     var guessRows = mutableListOf<GuessRow>()
@@ -98,8 +97,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Observer {
         }
     }
 
-    override fun update(p0: Observable?, p1: Any?) {
+    private fun reset() {
+        controller.reset()
+        // reset guess board
+        for(row in guessRows) {
+            row.clear()
+        }
 
+        // reset keyboard
+        for(pair in keyboardLetterButtons) {
+            val b = pair.value
+            b.setTextColor(ContextCompat.getColor(this, R.color.black))
+            b.background.setTint(ContextCompat.getColor(this, R.color.buttonDefault))
+        }
+    }
+
+    override fun update() {
         val letters = controller.kwordle.letters
         for(pair in keyboardLetterButtons) {
             val b = pair.value
@@ -139,21 +152,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, Observer {
             val alert = dialogBuilder.create()
             alert.setTitle("")
             alert.show()
-        }
-    }
-
-    private fun reset() {
-        controller.reset()
-        // reset guess board
-        for(row in guessRows) {
-            row.clear()
-        }
-
-        // reset keyboard
-        for(pair in keyboardLetterButtons) {
-            val b = pair.value
-            b.setTextColor(ContextCompat.getColor(this, R.color.black))
-            b.background.setTint(ContextCompat.getColor(this, R.color.buttonDefault))
         }
     }
 }
