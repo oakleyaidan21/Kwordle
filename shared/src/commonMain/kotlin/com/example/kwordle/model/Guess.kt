@@ -48,6 +48,20 @@ class Guess() {
         return true
     }
 
+    fun toEmojiString(): String {
+        var ret = ""
+        for(i in values) {
+            val emoji = when(i) {
+                1 -> "\uD83D\uDFE9"
+                2 -> "\uD83D\uDFE8"
+                3 -> "⬛"
+                else -> "?"
+            }
+            ret += emoji
+        }
+        return ret
+    }
+
     override fun toString(): String {
         return "[$word,${values.joinToString()}]"
     }

@@ -141,7 +141,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, KotlinObserver {
             // build alert dialog
             val dialogBuilder = AlertDialog.Builder(this)
             dialogBuilder
-                .setMessage(if(controller.win) "You won! Play again?" else "Too bad! The word was '${controller.kwordle.word}'. Play again?")
+                .setMessage(if(controller.win) "You won! Play again?\n${controller.getResultsString()}" else "Too bad! The word was '${controller.kwordle.word}'. Play again?")
                 .setPositiveButton("Yes!", DialogInterface.OnClickListener {
                         _, _ -> reset()
                 })

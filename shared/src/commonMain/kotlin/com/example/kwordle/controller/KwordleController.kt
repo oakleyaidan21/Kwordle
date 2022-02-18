@@ -47,7 +47,6 @@ class KwordleController : KotlinObservable {
             return false
         }
         currentGuess += letter
-//        setChanged()
         notifyObservers()
         return true
     }
@@ -63,7 +62,6 @@ class KwordleController : KotlinObservable {
             return false
         }
         currentGuess = currentGuess.dropLast(1)
-//        setChanged()
         notifyObservers()
         return true
     }
@@ -80,7 +78,6 @@ class KwordleController : KotlinObservable {
             guesses.add(kwordle.guessWord(currentGuess))
             currentGuess = ""
             checkForWinOrGameOver()
-//            setChanged()
             notifyObservers()
             return true;
         }
@@ -111,8 +108,15 @@ class KwordleController : KotlinObservable {
         guesses = ArrayList<Guess>()
         gameOver = false
         win = false
-//        setChanged()
         notifyObservers()
+    }
+
+    fun getResultsString() : String {
+        var ret = "Kwordle ${guesses.size}/6\n"
+        for(g in guesses) {
+            ret += g.toEmojiString() + "\n"
+        }
+        return ret;
     }
 
     /**
@@ -142,6 +146,8 @@ class KwordleController : KotlinObservable {
             gameOver = true
         }
     }
+
+
 
 
 }
