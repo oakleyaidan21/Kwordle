@@ -20,7 +20,7 @@ class Kwordle() {
      * @return an array that represents how the guess went
      */
     fun guessWord(guess: String): Guess {
-        var result = arrayOf(3,3,3,3,3)
+        var result = Array(word.length) { 3 }
         setupWordMap()
         // first pass, get perfect hits
         for(i in word.indices) {
