@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, KotlinObserver {
             wordSet.add(line)
             line = bufferedReader.readLine()
         }
-        controller = KwordleController(wordSet)
+        controller = KwordleController(wordSet, 6)
     }
 
     private fun setupKeyboard() {
@@ -137,7 +137,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, KotlinObserver {
         }
 
         if(controller.gameOver) {
-            Log.d("DICT:", controller.kwordle.word)
             // build alert dialog
             val dialogBuilder = AlertDialog.Builder(this)
             dialogBuilder

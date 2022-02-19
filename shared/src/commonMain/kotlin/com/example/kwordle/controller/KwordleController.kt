@@ -17,10 +17,13 @@ class KwordleController : KotlinObservable {
     var guesses = ArrayList<Guess>()
     var gameOver = false
     var win = false
+    var wordLength = 5
 
     constructor()
 
-    constructor(dictionary: Set<String>, word: String) {
+    constructor(dictionary: MutableSet<String>, word: String) {
+        allWords = dictionary.filter { it.length === word.length }.toSet()
+        this.wordLength = word.length
         allWords = dictionary
         kwordle = Kwordle(word)
     }
@@ -29,11 +32,11 @@ class KwordleController : KotlinObservable {
         kwordle = Kwordle(word)
     }
 
-    constructor(dictionary: Set<String>) {
-        allWords = dictionary
+    constructor(dictionary: MutableSet<String>, wordLength: Int) {
+        this.wordLength = wordLength
+        allWords = dictionary.filter { it.length === wordLength }.toSet()
         kwordle = Kwordle(allWords.random())
     }
-
 
     /**
      * Adds a letter to the current guess
@@ -43,7 +46,7 @@ class KwordleController : KotlinObservable {
      * @returns whether the letter was added
      */
     fun addLetterToGuess(letter: Char) : Boolean {
-        if(!actionCanBePerformed() || currentGuess.length === 5) {
+        if(!actionCanBePerformed() || currentGuess.length === wordLength) {
             return false
         }
         currentGuess += letter
@@ -146,8 +149,4 @@ class KwordleController : KotlinObservable {
             gameOver = true
         }
     }
-
-
-
-
 }

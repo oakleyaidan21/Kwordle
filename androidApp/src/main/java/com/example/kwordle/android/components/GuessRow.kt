@@ -45,7 +45,7 @@ class GuessRow(context: Context, attrs: AttributeSet) : LinearLayout(context, at
 
     fun setUIFromGuess(newGuess: Guess) {
         this.guess = newGuess
-        for(i in guess.word.indices) {
+        for(i in letterBoxes.indices) {
             letterBoxes[i].text = (guess.word[i].uppercase())
             letterBoxes[i].setBackgroundResource(R.drawable.back_full)
             when(guess.values[i]) {
@@ -59,7 +59,7 @@ class GuessRow(context: Context, attrs: AttributeSet) : LinearLayout(context, at
     }
 
     fun setUIFromPartialGuess(partial : String) {
-        for (i in 0 until 5) {
+        for (i in letterBoxes.indices) {
             letterBoxes[i].text = if(i < partial.length) partial[i].uppercase() else ""
             letterBoxes[i].setBackgroundResource(if(i < partial.length) R.drawable.back_full else R.drawable.back_empty)
         }
