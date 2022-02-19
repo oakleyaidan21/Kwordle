@@ -1,11 +1,11 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    kotlin("plugin.serialization") version "1.6.10"
 }
 
 kotlin {
     android()
-    
     listOf(
         iosX64(),
         iosArm64(),
@@ -22,6 +22,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
+
             }
         }
         val androidMain by getting

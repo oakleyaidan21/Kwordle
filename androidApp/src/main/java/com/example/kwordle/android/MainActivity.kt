@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.example.kwordle.android.components.GuessRow
 import com.example.kwordle.controller.KwordleController
+import com.example.kwordle.model.KwordleStatistics
 import com.example.kwordle.util.KotlinObserver
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, KotlinObserver {
     var controller: KwordleController = KwordleController()
     var keyboardLetterButtons = mutableMapOf<Char, Button>()
     var guessRows = mutableListOf<GuessRow>()
+    var results = KwordleStatistics()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,14 +32,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, KotlinObserver {
         Log.d("DICT:", controller.kwordle.word)
         setupKeyboard()
         setupRows()
-        showTutorial()
+        setupTopButtons()
+    }
+
+    private fun setupTopButtons() {
+        findViewById<ImageButton>(R.id.tutorialButton).setOnClickListener(this)
+        findViewById<ImageButton>(R.id.resultsButton).setOnClickListener(this)
+        findViewById<ImageButton>(R.id.settingsButton).setOnClickListener(this)
     }
 
     private fun showTutorial() {
-
         val dialogBuilder = AlertDialog.Builder(this)
         var inflater = this.layoutInflater
         dialogBuilder.setView(inflater.inflate(R.layout.tutorial_dialog, null))
+        dialogBuilder.create().show()
+    }
+
+    private fun showResultDialog() {
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setView(this.layoutInflater.inflate(R.layout.results_dialog, null))
         dialogBuilder.create().show()
     }
 
@@ -50,7 +63,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, KotlinObserver {
             wordSet.add(line)
             line = bufferedReader.readLine()
         }
-        controller = KwordleController(wordSet, 6)
+        controller = KwordleController(wordSet, 5)
     }
 
     private fun setupKeyboard() {
@@ -86,14 +99,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, KotlinObserver {
 
     override fun onClick(v: View?) {
         val letterRegex = """keyboard_.""".toRegex()
-
-        val tag: String = v?.getTag() as String
-        if(letterRegex.matches(tag)) {
-            controller.addLetterToGuess(tag.last())
-        } else if(v.id === R.id.keyboard_enter) {
-            controller.submitGuess()
-        } else if(v.id === R.id.keyboard_back) {
-            controller.removeLetterFromGuess()
+        if(v !== null) {
+            val tag: String = if(v.tag !== null) v.tag as String else ""
+            if(letterRegex.matches(tag)) {
+                controller.addLetterToGuess(tag.last())
+            } else if(v.id === R.id.keyboard_enter) {
+                controller.submitGuess()
+            } else if(v.id === R.id.keyboard_back) {
+                controller.removeLetterFromGuess()
+            } else if(v.id === R.id.tutorialButton) {
+                showTutorial()
+            } else {
+                Log.d("BUTTON:", "UNKNOWN BUTTON CLICKED!")
+            }
         }
     }
 
@@ -137,7 +155,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, KotlinObserver {
         }
 
         if(controller.gameOver) {
+            results.addResult(controller.guesses.size)
             // build alert dialog
+//            showResultDialog()
             val dialogBuilder = AlertDialog.Builder(this)
             dialogBuilder
                 .setMessage(if(controller.win) "You won! Play again?\n${controller.getResultsString()}" else "Too bad! The word was '${controller.kwordle.word}'. Play again?")
